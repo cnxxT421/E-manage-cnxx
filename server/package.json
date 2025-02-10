@@ -4,7 +4,9 @@
   "description": "Backend server code for e-manage",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "build": "tsc -b",
+    "start": "node dist/index.js"
   },
   "author": "Alok Yadav",
   "license": "ISC",
