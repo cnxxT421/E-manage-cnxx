@@ -1,20 +1,21 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 interface IEvent extends Document {
-    _id: string;
-    title: string;
-    description?: string;
-    location: string;
-    image: string;
-    url?: string;
-    price?: number;
-    isFree?: boolean;
-    startDate: Date;
-    endDate: Date;
-    organizer: Schema.Types.ObjectId;
-    category: Schema.Types.ObjectId;
-    createdAt: Date;
-    updatedAt: Date;
+	_id: string;
+	title: string;
+	description?: string;
+	location: string;
+	image: string;
+	url?: string;
+	price?: number;
+	isFree?: boolean;
+	startDate: Date;
+	endDate: Date;
+	organizer: Schema.Types.ObjectId;
+	category: Schema.Types.ObjectId;
+	atendees: Schema.Types.ObjectId[];
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 const EventSchema = new Schema<IEvent>(
@@ -32,7 +33,7 @@ const EventSchema = new Schema<IEvent>(
 		},
 		image: {
 			type: String,
-            required: true,
+			required: true,
 		},
 		url: {
 			type: String,
@@ -60,6 +61,12 @@ const EventSchema = new Schema<IEvent>(
 			type: Schema.Types.ObjectId,
 			ref: "Category",
 		},
+		atendees: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: "User",
+			}
+		]
 	},
 	{ timestamps: true }
 );
