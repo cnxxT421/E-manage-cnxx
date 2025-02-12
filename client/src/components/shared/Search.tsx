@@ -11,7 +11,6 @@ const Search = ({
 	searchTerm,
 	setSearchTerm,
 }: SearchProp) => {
-
 	return (
 		<div className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
 			<img

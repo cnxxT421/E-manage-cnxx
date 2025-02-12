@@ -1,50 +1,78 @@
-# React + TypeScript + Vite
+# E-manage | Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+E-manage is a full-stack **Event Management Platform** frontend built with **React, TypeScript, Socket.IO, Zod, TailwindCSS**. It provides a responsive interface for users to view, create, and manage events in real-time, as well as manage categories and authentication.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   **Frontend:** React.js (Vite), TypeScript
+-   **HTTP Requests:** Axios
+-   **Real-time Communication:** Socket.IO
+-   **Form Validation:** Zod with React Hook Form
+-   **Styling:** TailwindCSS
+-   **Deployment:** Vercel
 
-## Expanding the ESLint configuration
+## Setup and Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### **1️⃣ Clone the Repository**
 
-- Configure the top-level `parserOptions` property like this:
+Clone the repository to your local machine:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+git clone https://github.com/alok-x0s1/E-manage.git
+cd E-manage/client
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### **2️⃣ Install Dependencies**
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Run the following command to install all the necessary dependencies:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+### **3️⃣ Configure Environment Variables**
+
+Create a `.env` file in the root directory and add the following:
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+-   **VITE_API_URL**: The backend API URL (adjust according to your backend server).
+
+### **4️⃣ Start the Development Server**
+
+To run the project in development mode, execute the following command:
+
+```bash
+npm run dev
+```
+
+The frontend application will be accessible at `http://localhost:5173`.
+
+## Contributing
+
+Feel free to submit pull requests and open issues. Contributions are always welcome!
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-name`).
+3. Commit your changes (`git commit -m 'Add new feature'`).
+4. Push to the branch (`git push origin feature-name`).
+5. Open a pull request.
+
+## Acknowledgements
+
+-   [Vite](https://vitejs.dev/)
+-   [TypeScript](https://www.typescriptlang.org/)
+-   [Tailwind CSS](https://tailwindcss.com/)
+-   [Socket.IO](https://socket.io/)
+-   [React Hook Form](https://react-hook-form.com/)
+-   [Zod](https://zod.dev/)
+
+## Support
+
+For any issues, contact : **[@contact_me](https://instagram.com/mr_x0s1)**
+
+## Thank You!
+
+Thanks for using E-manage! If you have any questions or feedback, don't hesitate to reach out. Happy event planning!

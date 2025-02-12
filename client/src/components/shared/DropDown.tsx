@@ -33,7 +33,7 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
 			</SelectTrigger>
 			<SelectContent>
 				{categories &&
-				categories.length > 0 &&
+					categories.length > 0 &&
 					categories.map((category) => (
 						<SelectItem
 							key={category._id}

@@ -234,8 +234,12 @@ const UpdateEvent = () => {
 											Start Date:
 										</p>
 										<DatePicker
-											selected={field.value}
-											onChange={(date: Date) =>
+											selected={
+												field.value
+													? new Date(field.value)
+													: null
+											}
+											onChange={(date: Date | null) =>
 												field.onChange(date)
 											}
 											showTimeSelect
@@ -268,8 +272,12 @@ const UpdateEvent = () => {
 											End Date:
 										</p>
 										<DatePicker
-											selected={field.value}
-											onChange={(date: Date) =>
+											selected={
+												field.value
+													? new Date(field.value)
+													: null
+											}
+											onChange={(date: Date | null) =>
 												field.onChange(date)
 											}
 											showTimeSelect

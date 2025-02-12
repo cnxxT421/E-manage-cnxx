@@ -1,4 +1,4 @@
-import { Signup } from "@/components/shared/Signup";
+import Signup from "@/components/shared/Signup";
 
 const SignupPage = () => {
 	return (

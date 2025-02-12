@@ -26,7 +26,7 @@ import { AxiosError } from "axios";
 import { ErrorResponse } from "@/types/apiResponse";
 import { useNavigate } from "react-router-dom";
 
-const EventForm = ({ type }: { type: "Create" | "Update" }) => {
+const EventForm = () => {
 	const [files, setFiles] = useState<File[]>([]);
 	const { toast } = useToast();
 	const navigate = useNavigate();
@@ -135,22 +135,9 @@ const EventForm = ({ type }: { type: "Create" | "Update" }) => {
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormControl className="h-72">
-									<FormField
-										control={form.control}
-										name="image"
-										render={({ field }) => (
-											<FormItem className="w-full">
-												<FormControl className="h-72">
-													<FileUploader
-														onFieldChange={
-															field.onChange
-														}
-														setFiles={setFiles}
-													/>
-												</FormControl>
-												<FormMessage />
-											</FormItem>
-										)}
+									<FileUploader
+										onFieldChange={field.onChange}
+										setFiles={setFiles}
 									/>
 								</FormControl>
 								<FormMessage />
@@ -207,7 +194,7 @@ const EventForm = ({ type }: { type: "Create" | "Update" }) => {
 										</p>
 										<DatePicker
 											selected={field.value}
-											onChange={(date: Date) =>
+											onChange={(date: Date | null) =>
 												field.onChange(date)
 											}
 											showTimeSelect
@@ -241,7 +228,7 @@ const EventForm = ({ type }: { type: "Create" | "Update" }) => {
 										</p>
 										<DatePicker
 											selected={field.value}
-											onChange={(date: Date) =>
+											onChange={(date: Date | null) =>
 												field.onChange(date)
 											}
 											showTimeSelect

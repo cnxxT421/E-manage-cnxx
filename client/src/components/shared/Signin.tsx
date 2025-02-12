@@ -18,7 +18,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ErrorResponse } from "@/types/apiResponse";
 import { AxiosError } from "axios";
 
-export function Signin() {
+const Signin = () => {
 	const { toast } = useToast();
 	const navigate = useNavigate();
 
@@ -111,4 +111,6 @@ export function Signin() {
 			</form>
 		</Form>
 	);
-}
+};
+
+export default Signin;

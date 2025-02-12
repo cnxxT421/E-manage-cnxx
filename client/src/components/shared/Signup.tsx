@@ -20,7 +20,7 @@ import { AxiosError } from "axios";
 import axios from "@/utils/axios";
 import { ErrorResponse } from "@/types/apiResponse";
 
-export function Signup() {
+const Signup = () => {
 	const [files, setFiles] = useState<File[]>([]);
 	const { toast } = useToast();
 	const navigate = useNavigate();
@@ -200,4 +200,6 @@ export function Signup() {
 			</form>
 		</Form>
 	);
-}
+};
+
+export default Signup;
