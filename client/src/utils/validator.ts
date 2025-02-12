@@ -14,9 +14,21 @@ export const eventFormSchema = z.object({
 	startDate: z.date(),
 	endDate: z.date(),
 	categoryId: z.string(),
-	price: z.string(),
+	price: z.string().refine((val) => !isNaN(Number(val)), {
+		message: "Price must be a number",
+	}),
 	isFree: z.boolean(),
 	url: z.string().url("URL must be valid"),
+});
+
+export const updateEventSchema = z.object({
+	title: z.string().min(3, "Title is required").optional(),
+	description: z.string().optional(),
+	location: z.string().min(1, "Location is required").optional(),
+	url: z.string().url("URL must be valid").optional(),
+	startDate: z.string().optional(),
+	endDate: z.string().optional(),
+	categoryId: z.string().optional(),
 });
 
 export const signupSchema = z.object({
@@ -32,6 +44,9 @@ export const signupSchema = z.object({
 });
 
 export const signinSchema = z.object({
-	email: z.string().email("Invalid email format"),
+	username: z
+		.string()
+		.min(3, "Username must be at least 3 characters")
+		.max(20, "Username must be at most 20 characters"),
 	password: z.string().min(6, "Password must be at least 6 characters"),
 });

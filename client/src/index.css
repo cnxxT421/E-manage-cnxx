@@ -77,6 +77,26 @@ body {
 	font-family: var(--font-poppins);
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: hsl(210, 40%, 96%);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: hsl(222.2, 47.4%, 11.2%);
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: hsl(222.2, 47.4%, 20%);
+}
+
 .filter-grey {
 	filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(217%)
 		hue-rotate(32deg) brightness(98%) contrast(92%);

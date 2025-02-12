@@ -7,14 +7,16 @@ import {
 	Profile,
 	SigninPage,
 	SignupPage,
+	UpdateEventPage,
 } from "@/pages";
 import "./App.css";
 import { Toaster } from "@/components/ui/toaster";
+import RootLayout from "./components/Layout";
 
 function App() {
 	return (
 		<Router>
-			<div>
+			<RootLayout>
 				<Toaster />
 				<Routes>
 					<Route path="/" element={<Home />} />
@@ -22,10 +24,14 @@ function App() {
 					<Route path="/sign-in" element={<SigninPage />} />
 					<Route path="/events" element={<Explore />} />
 					<Route path="/events/:id" element={<EventDetailsPage />} />
+					<Route
+						path="/events/:id/update"
+						element={<UpdateEventPage />}
+					/>
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/create-event" element={<CreateEvent />} />
 				</Routes>
-			</div>
+			</RootLayout>
 		</Router>
 	);
 }

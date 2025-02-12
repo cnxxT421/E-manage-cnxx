@@ -13,6 +13,8 @@ export interface IEvent {
 	url: string;
 	organizer: IOrganizer;
 	category: ICategory;
+	isOrganizer: boolean;
+	isAttendee: boolean;
 	totalAttendees: number;
 	attendees: IAttendee[];
 }
