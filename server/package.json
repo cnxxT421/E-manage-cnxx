@@ -2,7 +2,7 @@
   "name": "e-manage-server",
   "version": "1.0.0",
   "description": "Backend server code for e-manage",
-  "main": "dist/index.js",
+  "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon",
     "build": "tsc -b",
