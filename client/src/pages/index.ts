@@ -5,6 +5,7 @@ import Home from "./Home";
 import Profile from "./Profile";
 import SigninPage from "./SigninPage";
 import SignupPage from "./SignupPage";
+import UpdateEventPage from "./UpdateEventPage";
 
 export {
 	Home,
@@ -14,4 +15,5 @@ export {
 	SignupPage,
 	Profile,
 	EventDetailsPage,
+	UpdateEventPage,
 };

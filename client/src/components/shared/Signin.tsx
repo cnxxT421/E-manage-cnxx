@@ -56,13 +56,13 @@ export function Signin() {
 				<div className="flex flex-col gap-5 md:flex-row">
 					<FormField
 						control={form.control}
-						name="email"
+						name="username"
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormControl>
 									<Input
-										placeholder="Email"
-										type="email"
+										placeholder="Username"
+										type="text"
 										{...field}
 										className="input-field"
 									/>

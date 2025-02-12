@@ -30,6 +30,16 @@ export const eventDefaultValues = {
 	url: "",
 };
 
+export const updateEventDefaultValues = {
+	title: "",
+	description: "",
+	location: "",
+	startDateTime: new Date(),
+	endDateTime: new Date(),
+	categoryId: "",
+	url: "",
+};
+
 export const signupDefaultValues = {
 	firstName: "",
 	lastName: "",
@@ -40,6 +50,33 @@ export const signupDefaultValues = {
 };
 
 export const signinDefaultValues = {
-	email: "",
+	username: "",
 	password: "",
 };
+
+export const categories = [
+	{
+		_id: "1",
+		name: "Technology",
+	},
+	{
+		_id: "2",
+		name: "Computer Science",
+	},
+	{
+		_id: "3",
+		name: "Finance",
+	},
+	{
+		_id: "4",
+		name: "Commerse",
+	},
+	{
+		_id: "5",
+		name: "AI",
+	},
+	{
+		_id: "7",
+		name: "ML",
+	},
+];

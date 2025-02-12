@@ -16,7 +16,6 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog";
 import { useNavigate } from "react-router-dom";
-import RootLayout from "@/components/Layout";
 
 const Profile = () => {
 	const [profile, setProfile] = useState<IUser | null>(null);
@@ -71,7 +70,7 @@ const Profile = () => {
 	};
 
 	return (
-		<RootLayout>
+		<main>
 			<section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
 				<h3 className="wrapper h3-bold text-center sm:text-left">
 					Your Profile
@@ -191,7 +190,7 @@ const Profile = () => {
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
-		</RootLayout>
+		</main>
 	);
 };
 

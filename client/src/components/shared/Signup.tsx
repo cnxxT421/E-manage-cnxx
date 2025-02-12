@@ -192,6 +192,11 @@ export function Signup() {
 				>
 					{form.formState.isSubmitting ? "Submitting..." : "Signup"}
 				</Button>
+				<p className="text-xs">
+					*Submitting might take some time, because of uploading
+					avatar image, Refresh the page and login again, Or be
+					patient.
+				</p>
 			</form>
 		</Form>
 	);
