@@ -4,10 +4,17 @@ import { EventSchema, UpdateEventSchema } from "../schemas/event.schema";
 import { deleteFromCloudinary, uploadOnCloudinary } from "../config/cloudinary";
 import Event from "../models/event.model";
 import { validateDate } from "../utils/date";
+import mongoose, { ObjectId, Schema } from "mongoose";
+import Category from "../models/category.model";
 
 const createEvent = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const userId = req.user?._id;
+		if (!userId) {
+			errorResponse(res, 400, "Invalid request parameters");
+			return;
+		}
+
 		const validData = EventSchema.safeParse(req.body);
 		if (!validData.success) {
 			errorResponse(
@@ -28,7 +35,7 @@ const createEvent = async (req: Request, res: Response): Promise<void> => {
 			isFree,
 			startDate,
 			endDate,
-			category,
+			categoryId,
 		} = validData.data;
 
 		const dateValidation = validateDate(startDate, endDate);
@@ -37,7 +44,7 @@ const createEvent = async (req: Request, res: Response): Promise<void> => {
 			return;
 		}
 
-		const existingCategory = await Event.findOne({ category });
+		const existingCategory = await Category.findOne({ _id: categoryId });
 		if (!existingCategory) {
 			errorResponse(res, 400, "Category not found");
 			return;
@@ -62,11 +69,29 @@ const createEvent = async (req: Request, res: Response): Promise<void> => {
 			image: imageCloudinaryUrl?.secure_url,
 			url,
 			price,
-			isFree,
+			isFree: !price,
 			startDate,
 			endDate,
-			organizer: userId,
+			organizer: new mongoose.Types.ObjectId(userId),
 			category: existingCategory._id,
+		});
+
+		const isCreated = await Event.findOne({ _id: event._id }).populate([
+			{
+				path: "organizer",
+				select: "username",
+			},
+			{ path: "category", select: "name" },
+		]);
+		if (!isCreated) {
+			errorResponse(res, 500, "Event creation failed");
+			return;
+		}
+
+		const io = req.app.get("socketio");
+		io.emit("eventUpdate", {
+			event: isCreated,
+			type: "create",
 		});
 
 		successResponse(res, 201, "Event created successfully", {
@@ -74,7 +99,7 @@ const createEvent = async (req: Request, res: Response): Promise<void> => {
 		});
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
@@ -130,7 +155,7 @@ const updateEvent = async (req: Request, res: Response): Promise<void> => {
 			url,
 			startDate,
 			endDate,
-			category,
+			categoryId,
 		} = validData.data;
 
 		const dateValidation = validateDate(startDate, endDate);
@@ -139,7 +164,7 @@ const updateEvent = async (req: Request, res: Response): Promise<void> => {
 			return;
 		}
 
-		const existingCategory = await Event.findOne({ category });
+		const existingCategory = await Category.findOne({ _id: categoryId });
 		if (!existingCategory) {
 			errorResponse(res, 400, "Category not found");
 			return;
@@ -157,14 +182,26 @@ const updateEvent = async (req: Request, res: Response): Promise<void> => {
 				category: existingCategory._id,
 			},
 			{ new: true }
-		);
+		).populate([
+			{
+				path: "organizer",
+				select: "username",
+			},
+			{ path: "category", select: "name" },
+		]);
+
+		const io = req.app.get("socketio");
+		io.emit("eventUpdate", {
+			event: updatedEvent,
+			type: "update",
+		});
 
 		successResponse(res, 200, "Event updated successfully", {
 			event: updatedEvent,
 		});
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
@@ -208,18 +245,29 @@ const deleteEvent = async (req: Request, res: Response): Promise<void> => {
 		}
 		await Event.findOneAndDelete({ _id: eventId, organizer: userId });
 
+		const io = req.app.get("socketio");
+		io.emit("eventUpdate", {
+			event: { _id: event._id },
+			type: "delete",
+		});
+
 		successResponse(res, 200, "Event deleted successfully");
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
 const getEvent = async (req: Request, res: Response): Promise<void> => {
 	try {
 		const eventId = req.params.id;
+		if (!eventId || !mongoose.isValidObjectId(eventId)) {
+			errorResponse(res, 400, "Invalid request parameters");
+			return;
+		}
+
 		const event = await Event.aggregate([
-			{ $match: { _id: eventId } },
+			{ $match: { _id: new mongoose.Types.ObjectId(eventId) } },
 			{
 				$lookup: {
 					from: "users",
@@ -230,8 +278,10 @@ const getEvent = async (req: Request, res: Response): Promise<void> => {
 					pipeline: [
 						{
 							$project: {
-								name: 1,
-								image: 1,
+								username: 1,
+								avatar: 1,
+								firstName: 1,
+								lastName: 1,
 							},
 						},
 					],
@@ -251,6 +301,39 @@ const getEvent = async (req: Request, res: Response): Promise<void> => {
 							},
 						},
 					],
+				},
+			},
+			{
+				$lookup: {
+					from: "users",
+					localField: "atendees",
+					foreignField: "_id",
+					as: "attendees",
+					pipeline: [
+						{
+							$project: {
+								username: 1,
+								avatar: 1,
+							},
+						},
+					],
+				},
+			},
+			{
+				$addFields: {
+					organizer: { $arrayElemAt: ["$organizer", 0] },
+					category: { $arrayElemAt: ["$category", 0] },
+					attendees: {
+						$map: {
+							input: "$attendees",
+							as: "attendee",
+							in: {
+								username: "$$attendee.username",
+								avatar: "$$attendee.avatar",
+							},
+						},
+					},
+					totalAttendees: { $size: "$atendees" },
 				},
 			},
 			{
@@ -267,6 +350,8 @@ const getEvent = async (req: Request, res: Response): Promise<void> => {
 					endDate: 1,
 					category: 1,
 					organizer: 1,
+					attendees: 1,
+					totalAttendees: 1,
 				},
 			},
 		]);
@@ -275,10 +360,21 @@ const getEvent = async (req: Request, res: Response): Promise<void> => {
 			return;
 		}
 
-		successResponse(res, 200, "Event fetched successfully", event);
+		const isOrganizer =
+			event[0]?.organizer?._id?.toString() === req.user?._id.toString();
+
+		const isAttendee = event[0].attendees.some(
+			(attendee: any) => attendee.username === req.user?.username
+		);
+
+		successResponse(res, 200, "Event fetched successfully", {
+			...event[0],
+			isOrganizer,
+			isAttendee,
+		});
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
@@ -295,8 +391,7 @@ const getAllEvents = async (req: Request, res: Response): Promise<void> => {
 					pipeline: [
 						{
 							$project: {
-								name: 1,
-								image: 1,
+								username: 1,
 							},
 						},
 					],
@@ -318,13 +413,154 @@ const getAllEvents = async (req: Request, res: Response): Promise<void> => {
 					],
 				},
 			},
+			{
+				$addFields: {
+					organizer: { $arrayElemAt: ["$organizer", 0] },
+					category: { $arrayElemAt: ["$category", 0] },
+					totalAtendees: { $size: "$atendees" },
+				},
+			},
+			{
+				$project: {
+					_id: 1,
+					title: 1,
+					location: 1,
+					image: 1,
+					price: 1,
+					isFree: 1,
+					startDate: 1,
+					category: 1,
+					organizer: 1,
+					totalAtendees: 1,
+				},
+			},
 		]);
 
 		successResponse(res, 200, "Events fetched successfully", events);
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
-export { createEvent, updateEvent, deleteEvent, getEvent, getAllEvents };
+const joinEvent = async (req: Request, res: Response): Promise<void> => {
+	try {
+		const eventId = req.params.id;
+		const userId = req.user?._id;
+
+		if (!eventId || !userId || !mongoose.isValidObjectId(eventId)) {
+			errorResponse(res, 400, "Invalid request parameters");
+			return;
+		}
+
+		const event = await Event.findById(eventId);
+		if (!event) {
+			errorResponse(res, 404, "Event not found");
+			return;
+		}
+
+		const now = new Date();
+		if (event.startDate < now) {
+			errorResponse(
+				res,
+				400,
+				"Cannot join an event that has already started"
+			);
+			return;
+		}
+		if (event.endDate < now) {
+			errorResponse(
+				res,
+				400,
+				"Cannot join an event that has already ended"
+			);
+			return;
+		}
+
+		const io = req.app.get("socketio");
+
+		const userObjectId = new mongoose.Types.ObjectId(userId);
+		const alreadyJoined = event.atendees.some((attendee: any) =>
+			attendee.equals(userObjectId)
+		);
+
+		if (alreadyJoined) {
+			successResponse(res, 200, "Event already joined");
+			return;
+		}
+
+		const updatedEvent = await Event.findByIdAndUpdate(
+			eventId,
+			{ $push: { atendees: userObjectId } },
+			{ new: true }
+		);
+
+		io.emit("atendeeUpdate", {
+			eventId,
+			count: updatedEvent?.atendees.length ?? 0,
+			type: "join",
+		});
+
+		successResponse(res, 200, "Event joined successfully");
+	} catch (error) {
+		console.log(error);
+		errorResponse(res, 500, "Internal server error", error);
+	}
+};
+
+const leaveEvent = async (req: Request, res: Response): Promise<void> => {
+	try {
+		const eventId = req.params.id;
+		const userId = req.user?._id;
+
+		if (!eventId || !userId) {
+			errorResponse(res, 400, "Invalid request parameters");
+			return;
+		}
+
+		const event = await Event.findById(eventId);
+		if (!event) {
+			errorResponse(res, 404, "Event not found");
+			return;
+		}
+
+		const io = req.app.get("socketio");
+
+		const userObjectId = new mongoose.Types.ObjectId(userId);
+		const alreadyJoined = event.atendees.some((attendee: any) =>
+			attendee.equals(userObjectId)
+		);
+
+		if (!alreadyJoined) {
+			successResponse(res, 200, "Event already left");
+			return;
+		}
+
+		const updatedEvent = await Event.findByIdAndUpdate(
+			eventId,
+			{ $pull: { atendees: userObjectId } },
+			{ new: true }
+		);
+
+		io.emit("atendeeUpdate", {
+			eventId,
+			count: updatedEvent?.atendees.length ?? 0,
+			type: "leave",
+		});
+
+		successResponse(res, 200, "Event already left");
+	} catch (error) {
+		console.log(error);
+		errorResponse(res, 500, "Internal server error", error);
+	}
+};
+
+export {
+	createEvent,
+	updateEvent,
+	deleteEvent,
+	getEvent,
+	getAllEvents,
+	joinEvent,
+	leaveEvent,
+};

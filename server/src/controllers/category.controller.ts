@@ -31,7 +31,7 @@ const addCategory = async (req: Request, res: Response): Promise<void> => {
 		});
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
@@ -46,7 +46,7 @@ const getCategories = async (req: Request, res: Response): Promise<void> => {
 		);
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
@@ -68,7 +68,7 @@ const deleteCategory = async (req: Request, res: Response): Promise<void> => {
 		successResponse(res, 200, "Category deleted successfully");
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 

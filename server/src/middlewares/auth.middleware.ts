@@ -32,7 +32,7 @@ const isLoggedIn = async (req: Request, res: Response, next: NextFunction) => {
 		next();
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 

@@ -20,11 +20,15 @@ const signupUser = async (req: Request, res: Response): Promise<void> => {
 
 		const { username, firstName, lastName, email, password } =
 			validData.data;
-		const existingUser = await User.findOne({
-			$or: [{ email }, { username }],
-		});
+		const existingUser = await User.findOne({ email });
 		if (existingUser) {
-			errorResponse(res, 400, "User already exists");
+			errorResponse(res, 400, "User already exists, please sign in");
+			return;
+		}
+
+		const existingUsername = await User.findOne({ username });
+		if (existingUsername) {
+			errorResponse(res, 400, "Please choose a different username");
 			return;
 		}
 
@@ -56,7 +60,7 @@ const signupUser = async (req: Request, res: Response): Promise<void> => {
 		});
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
@@ -73,11 +77,11 @@ const signinUser = async (req: Request, res: Response): Promise<void> => {
 			return;
 		}
 
-		const { email, password } = validData.data;
+		const { username, password } = validData.data;
 
-		const user = await User.findOne({ email }).select("+password");
+		const user = await User.findOne({ username }).select("+password");
 		if (!user) {
-			errorResponse(res, 400, "User not found");
+			errorResponse(res, 400, "User not found or invalid credentials");
 			return;
 		}
 
@@ -96,7 +100,7 @@ const signinUser = async (req: Request, res: Response): Promise<void> => {
 		});
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
@@ -106,7 +110,7 @@ const logoutUser = async (req: Request, res: Response): Promise<void> => {
 		successResponse(res, 200, "User signed out successfully");
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
@@ -127,7 +131,7 @@ const getProfile = async (req: Request, res: Response): Promise<void> => {
 		successResponse(res, 200, "User fetched successfully", user);
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 
@@ -153,7 +157,7 @@ const deleteUser = async (req: Request, res: Response): Promise<void> => {
 		successResponse(res, 200, "User deleted successfully");
 	} catch (error) {
 		console.log(error);
-		errorResponse(res, 500, "Something went wrong", error);
+		errorResponse(res, 500, "Internal server error", error);
 	}
 };
 

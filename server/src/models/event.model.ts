@@ -39,7 +39,7 @@ const EventSchema = new Schema<IEvent>(
 			type: String,
 		},
 		price: {
-			type: Number,
+			type: String,
 		},
 		isFree: {
 			type: Boolean,
@@ -47,11 +47,11 @@ const EventSchema = new Schema<IEvent>(
 		},
 		startDate: {
 			type: Date,
-			required: true,
+			default: Date.now,
 		},
 		endDate: {
 			type: Date,
-			required: true,
+			default: Date.now,
 		},
 		organizer: {
 			type: Schema.Types.ObjectId,
@@ -65,8 +65,9 @@ const EventSchema = new Schema<IEvent>(
 			{
 				type: Schema.Types.ObjectId,
 				ref: "User",
-			}
-		]
+				default: [],
+			},
+		],
 	},
 	{ timestamps: true }
 );
