@@ -132,7 +132,7 @@ const EventDetails = () => {
 							) : event ? (
 								<div className="flex gap-2 md:gap-3">
 									<img
-										src="/src/assets/calendar.svg"
+										src="/calendar.svg"
 										alt="calendar"
 										width={32}
 										height={32}
@@ -171,7 +171,7 @@ const EventDetails = () => {
 							) : event ? (
 								<div className="p-regular-20 flex items-center gap-3">
 									<img
-										src="/src/assets/location.svg"
+										src="/location.svg"
 										alt="location"
 										width={32}
 										height={32}
@@ -224,7 +224,7 @@ const EventDetails = () => {
 									className="rounded-xl bg-white p-3 shadow-sm transition-all"
 								>
 									<img
-										src="/src/assets/edit.svg"
+										src="/edit.svg"
 										alt="edit"
 										width={20}
 										height={20}

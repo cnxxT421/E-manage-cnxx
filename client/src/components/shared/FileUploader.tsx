@@ -50,7 +50,7 @@ export function FileUploader({ onFieldChange, setFiles }: FileUploaderProps) {
 				) : (
 					<>
 						<img
-							src="/src/assets/file-upload.svg"
+							src="/file-upload.svg"
 							width={77}
 							height={77}
 							alt="file upload"

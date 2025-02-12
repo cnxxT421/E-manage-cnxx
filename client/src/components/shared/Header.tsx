@@ -8,11 +8,7 @@ const Header = () => {
 		<header className="w-full border-b">
 			<div className="wrapper flex items-center justify-between p-2">
 				<Link to="/" className="w-36">
-					<img
-						src="/src/assets/images/logo.jpeg"
-						alt="logo"
-						width={80}
-					/>
+					<img src="/images/logo.jpeg" alt="logo" width={80} />
 				</Link>
 
 				<nav className="hidden md:flex-between w-full max-w-xs">

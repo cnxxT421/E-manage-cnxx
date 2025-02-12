@@ -49,7 +49,7 @@ const EventDeleteButton = ({ id }: { id: string }) => {
 			<DialogTrigger asChild>
 				<div className="rounded-xl bg-white p-3 shadow-sm transition-all cursor-pointer">
 					<img
-						src="/src/assets/delete.svg"
+						src="/delete.svg"
 						alt="edit"
 						width={20}
 						height={20}

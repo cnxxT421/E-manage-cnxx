@@ -34,7 +34,7 @@ const Home = () => {
 				</div>
 
 				<img
-					src="src/assets/images/home-image.jpg"
+					src="/images/home-image.jpg"
 					alt="People enjoying an event together"
 					width={1000}
 					height={1000}

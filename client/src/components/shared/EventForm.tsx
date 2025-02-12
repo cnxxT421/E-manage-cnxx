@@ -155,7 +155,7 @@ const EventForm = () => {
 								<FormControl>
 									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
 										<img
-											src="/src/assets/location-grey.svg"
+											src="/location-grey.svg"
 											alt="calendar"
 											width={24}
 											height={24}
@@ -183,7 +183,7 @@ const EventForm = () => {
 								<FormControl>
 									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
 										<img
-											src="/src/assets/calendar.svg"
+											src="/calendar.svg"
 											alt="calendar"
 											width={24}
 											height={24}
@@ -217,7 +217,7 @@ const EventForm = () => {
 								<FormControl>
 									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
 										<img
-											src="/src/assets/calendar.svg"
+											src="/calendar.svg"
 											alt="calendar"
 											width={24}
 											height={24}
@@ -253,7 +253,7 @@ const EventForm = () => {
 								<FormControl>
 									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
 										<img
-											src="/src/assets/dollar.svg"
+											src="/dollar.svg"
 											alt="dollar"
 											width={24}
 											height={24}
@@ -308,7 +308,7 @@ const EventForm = () => {
 								<FormControl>
 									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
 										<img
-											src="/src/assets/link.svg"
+											src="/link.svg"
 											alt="link"
 											width={24}
 											height={24}
