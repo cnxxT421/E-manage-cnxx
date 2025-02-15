@@ -2,6 +2,13 @@
 
 E-manage is a full-stack **Event Management Platform** frontend built with **React, TypeScript, Socket.IO, Zod, TailwindCSS**. It provides a responsive interface for users to view, create, and manage events in real-time, as well as manage categories and authentication.
 
+```js
+# Test user credentials
+
+username: john-doe
+password: john12345
+```
+
 ## Overview
 
 This plateform allows users to create, view, and manage events. It also allows users to create, view, and manage categories. It also allows users to login and logout. Here are the main features of the platform:
