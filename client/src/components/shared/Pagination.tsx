@@ -1,4 +1,5 @@
-import { Button } from "../ui/button";
+import { exploreItemVariants } from "@/constants/animation";
+import { motion } from "framer-motion";
 
 type PaginationProps = {
 	totalPages: number;
@@ -16,30 +17,44 @@ const Pagination = ({
 	handlePageChange,
 }: PaginationProps) => {
 	return (
-		<div className="flex items-center justify-center gap-2 mt-6">
-			<Button onClick={handlePrevPage} disabled={currentPage === 1}>
-				Prev
-			</Button>
-			{Array.from({ length: totalPages }, (_, index) => (
-				<button
-					key={index}
-					onClick={() => handlePageChange(index + 1)}
-					className={`px-4 py-2 rounded-md transition-colors ${
-						currentPage === index + 1
-							? "bg-red-500 text-white"
+		<motion.div
+			className="flex gap-2 items-center justify-center"
+			variants={exploreItemVariants}
+		>
+			<motion.button
+				whileHover={{ scale: 1.1 }}
+				whileTap={{ scale: 0.9 }}
+				onClick={handlePrevPage}
+				disabled={currentPage === 1}
+				className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:opacity-50"
+			>
+				Previous
+			</motion.button>
+			{Array.from({ length: totalPages }, (_, i) => (
+				<motion.button
+					key={i + 1}
+					whileHover={{ scale: 1.1 }}
+					whileTap={{ scale: 0.9 }}
+					onClick={() => handlePageChange(i + 1)}
+					className={`w-10 h-10 rounded-full ${
+						currentPage === i + 1
+							? "bg-blue-500 text-white"
 							: "bg-gray-200"
 					}`}
 				>
-					{index + 1}
-				</button>
+					{i + 1}
+				</motion.button>
 			))}
-			<Button
+			<motion.button
+				whileHover={{ scale: 1.1 }}
+				whileTap={{ scale: 0.9 }}
 				onClick={handleNextPage}
 				disabled={currentPage === totalPages}
+				className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:opacity-50"
 			>
 				Next
-			</Button>
-		</div>
+			</motion.button>
+		</motion.div>
 	);
 };
 

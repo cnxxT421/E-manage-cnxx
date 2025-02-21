@@ -4,6 +4,7 @@ import {
 	EventDetailsPage,
 	Explore,
 	Home,
+	NotFoundPage,
 	Profile,
 	SigninPage,
 	SignupPage,
@@ -30,6 +31,7 @@ function App() {
 					/>
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/create-event" element={<CreateEvent />} />
+					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</RootLayout>
 		</Router>

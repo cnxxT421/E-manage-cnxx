@@ -1,48 +1,102 @@
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Calendar } from "lucide-react";
+import Features from "@/components/shared/Features";
+import CTA from "@/components/shared/CTA";
 
-const Home = () => {
+const HomePage = () => {
 	return (
-		<section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
-			<div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0">
-				<div className="flex flex-col justify-center gap-8">
-					<h1 className="h1-bold">
-						Create, Share, and Enjoy: Your Ultimate Event Hub!
-					</h1>
-					<p className="p-regular-20 md:p-regular-24">
-						Join a thriving community and discover thousands of
-						events tailored to your interests. Connect, learn, and
-						have fun!
-					</p>
-					<div className="flex flex-col gap-4 sm:flex-row">
-						<Button
-							size="lg"
-							asChild
-							className="button w-full sm:w-fit"
+		<div className="min-h-screen bg-gradient-to-b from-blue-50 to-white pt-24">
+			<motion.section
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.8 }}
+				className="relative overflow-hidden"
+			>
+				<div className="wrapper py-20">
+					<div className="flex flex-col lg:flex-row items-center gap-12">
+						<motion.div
+							initial={{ x: -100, opacity: 0 }}
+							animate={{ x: 0, opacity: 1 }}
+							transition={{ duration: 0.8 }}
+							className="flex-1 text-center lg:text-left"
 						>
-							<Link to="/events">Explore Now</Link>
-						</Button>
-						<Button
-							variant="outline"
-							size="lg"
-							asChild
-							className="button w-full sm:w-fit"
+							<motion.h1
+								initial={{ y: 20, opacity: 0 }}
+								animate={{ y: 0, opacity: 1 }}
+								transition={{ delay: 0.2, duration: 0.8 }}
+								className="text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
+							>
+								Transform Your Events Management
+							</motion.h1>
+							<motion.p
+								initial={{ y: 20, opacity: 0 }}
+								animate={{ y: 0, opacity: 1 }}
+								transition={{ delay: 0.4, duration: 0.8 }}
+								className="text-xl text-gray-600 mb-8"
+							>
+								Streamline your event planning process with our
+								all-in-one platform. Create, manage, and execute
+								exceptional events with ease.
+							</motion.p>
+							<motion.div
+								initial={{ y: 20, opacity: 0 }}
+								animate={{ y: 0, opacity: 1 }}
+								transition={{ delay: 0.6, duration: 0.8 }}
+								className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+							>
+								<motion.div
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
+								>
+									<Button>
+										<Link to="/sign-up">Get Started</Link>
+									</Button>
+								</motion.div>
+								<motion.div
+									whileHover={{ scale: 1.05 }}
+									whileTap={{ scale: 0.95 }}
+								>
+									<Button
+										variant="outline"
+										className="px-8 py-6 text-lg rounded-full"
+									>
+										<Link to="/events">Watch Demo</Link>
+									</Button>
+								</motion.div>
+							</motion.div>
+						</motion.div>
+						<motion.div
+							className="flex-1"
+							initial={{ x: 100, opacity: 0 }}
+							animate={{ x: 0, opacity: 1 }}
+							transition={{ duration: 0.8 }}
 						>
-							<Link to="/create-event">Create an Event</Link>
-						</Button>
+							<motion.div
+								animate={{
+									y: [0, -20, 0],
+									rotate: [0, 5, -5, 0],
+								}}
+								transition={{
+									duration: 5,
+									repeat: Infinity,
+									repeatType: "reverse",
+								}}
+								className="relative"
+							>
+								<div className="w-64 h-64 mx-auto bg-blue-600 rounded-full opacity-20 blur-xl" />
+								<Calendar className="w-64 h-64 text-blue-600 mx-auto absolute top-0 left-1/2 transform -translate-x-1/2" />
+							</motion.div>
+						</motion.div>
 					</div>
 				</div>
+			</motion.section>
 
-				<img
-					src="/images/home-image.jpg"
-					alt="People enjoying an event together"
-					width={1000}
-					height={1000}
-					className="max-h-[70vh] object-contain object-center 2xl:max-h-[60vh]"
-				/>
-			</div>
-		</section>
+			<Features />
+			<CTA />
+		</div>
 	);
 };
 
-export default Home;
+export default HomePage;

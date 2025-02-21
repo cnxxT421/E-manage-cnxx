@@ -3,6 +3,11 @@ import { IEvent } from "@/types/event";
 import axios from "@/utils/axios";
 import socket from "@/utils/socket";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+	exploreContainerVariants,
+	exploreItemVariants,
+} from "@/constants/animation";
 
 const Explore = () => {
 	const [events, setEvents] = useState<IEvent[]>([]);
@@ -47,20 +52,32 @@ const Explore = () => {
 	}, []);
 
 	return (
-		<main>
-			<section
+		<motion.main
+			initial="hidden"
+			animate="visible"
+			variants={exploreContainerVariants}
+		>
+			<motion.section
 				id="events"
-				className="wrapper my-8 flex flex-col gap-8"
+				className="wrapper py-28 flex flex-col gap-8"
+				variants={exploreItemVariants}
 			>
-				<h2 className="h2-bold">Discover and Join Amazing Events</h2>
+				<motion.h2
+					className="h2-bold"
+					initial={{ opacity: 0, x: -20 }}
+					animate={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.5 }}
+				>
+					Discover and Join Amazing Events
+				</motion.h2>
 
 				<Collection
 					data={events}
 					emptyTitle="No Events Available"
 					emptyStateSubtext="Check back soon for new events!"
 				/>
-			</section>
-		</main>
+			</motion.section>
+		</motion.main>
 	);
 };
 

@@ -59,7 +59,11 @@ export function FileUploader({ onFieldChange, setFiles }: FileUploaderProps) {
 						<p className="p-medium-12 mb-4">
 							SVG, PNG, JPG (Max: 500KB)
 						</p>
-						<Button type="button" className="rounded-full">
+						<Button
+							type="button"
+							variant="outline"
+							className="border border-grey-500 rounded-full"
+						>
 							Select from computer
 						</Button>
 					</>

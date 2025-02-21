@@ -19,6 +19,7 @@ import { z } from "zod";
 import { AxiosError } from "axios";
 import axios from "@/utils/axios";
 import { ErrorResponse } from "@/types/apiResponse";
+import { motion } from "framer-motion";
 
 const Signup = () => {
 	const [files, setFiles] = useState<File[]>([]);
@@ -69,60 +70,73 @@ const Signup = () => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="flex flex-col gap-5"
+				className="w-full max-w-xl p-6 bg-white rounded-lg shadow-lg space-y-6"
 			>
-				<div className="flex flex-col gap-5 md:flex-row">
-					<FormField
-						control={form.control}
-						name="firstName"
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormControl>
-									<Input
-										placeholder="First Name"
-										{...field}
-										className="input-field"
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="lastName"
-						render={({ field }) => (
-							<FormItem className="w-full">
-								<FormControl>
-									<Input
-										placeholder="Last Name"
-										{...field}
-										className="input-field"
-									/>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-				</div>
-				<FormField
-					control={form.control}
-					name="username"
-					render={({ field }) => (
-						<FormItem className="w-full">
-							<FormControl>
-								<Input
-									placeholder="Username"
-									{...field}
-									className="input-field"
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					className="flex flex-col gap-5"
+				>
+					<div className="flex flex-col gap-5 md:flex-row">
+						<FormField
+							control={form.control}
+							name="firstName"
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormControl>
+										<Input
+											placeholder="First Name"
+											{...field}
+											className="input-field transition-all duration-300 ease-in-out focus:ring-2 focus:ring-blue-500"
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="lastName"
+							render={({ field }) => (
+								<FormItem className="w-full">
+									<FormControl>
+										<Input
+											placeholder="Last Name"
+											{...field}
+											className="input-field transition-all duration-300 ease-in-out focus:ring-2 focus:ring-blue-500"
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</div>
 
-				<div className="flex flex-col gap-5 md:flex-row">
+					<FormField
+						control={form.control}
+						name="username"
+						render={({ field }) => (
+							<FormItem className="w-full">
+								<FormControl>
+									<Input
+										placeholder="Username"
+										{...field}
+										className="input-field transition-all duration-300 ease-in-out focus:ring-2 focus:ring-blue-500"
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				</motion.div>
+
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.2, duration: 0.6 }}
+					className="flex flex-col gap-5 md:flex-row"
+				>
 					<FormField
 						control={form.control}
 						name="email"
@@ -133,7 +147,7 @@ const Signup = () => {
 										placeholder="Email"
 										type="email"
 										{...field}
-										className="input-field"
+										className="input-field transition-all duration-300 ease-in-out focus:ring-2 focus:ring-blue-500"
 									/>
 								</FormControl>
 								<FormMessage />
@@ -150,31 +164,43 @@ const Signup = () => {
 										placeholder="Password"
 										type="password"
 										{...field}
-										className="input-field"
+										className="input-field transition-all duration-300 ease-in-out focus:ring-2 focus:ring-blue-500"
 									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
-				</div>
+				</motion.div>
 
-				<FormField
-					control={form.control}
-					name="avatar"
-					render={({ field }) => (
-						<FormItem>
-							<FormControl>
-								<FileUploader
-									onFieldChange={field.onChange}
-									setFiles={setFiles}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<p className="text-md">
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.4, duration: 0.6 }}
+				>
+					<FormField
+						control={form.control}
+						name="avatar"
+						render={({ field }) => (
+							<FormItem>
+								<FormControl>
+									<FileUploader
+										onFieldChange={field.onChange}
+										setFiles={setFiles}
+									/>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+				</motion.div>
+
+				<motion.p
+					initial={{ opacity: 0, x: -20 }}
+					animate={{ opacity: 1, x: 0 }}
+					transition={{ delay: 0.5 }}
+					className="text-md"
+				>
 					Already have an account?{" "}
 					<Link
 						className="text-red-500 hover:underline duration-300"
@@ -182,16 +208,25 @@ const Signup = () => {
 					>
 						Sign-in
 					</Link>
-				</p>
+				</motion.p>
 
-				<Button
-					type="submit"
-					size="lg"
-					disabled={form.formState.isSubmitting}
-					className="button col-span-2 w-full"
+				<motion.div
+					initial={{ opacity: 0, scale: 0.8 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{ delay: 0.6 }}
 				>
-					{form.formState.isSubmitting ? "Submitting..." : "Signup"}
-				</Button>
+					<Button
+						type="submit"
+						size="lg"
+						disabled={form.formState.isSubmitting}
+						className="button col-span-2 w-full transition-all duration-300 ease-in-out focus:ring-2 focus:ring-blue-500"
+					>
+						{form.formState.isSubmitting
+							? "Submitting..."
+							: "Signup"}
+					</Button>
+				</motion.div>
+
 				<p className="text-xs">
 					*Submitting might take some time, because of uploading
 					avatar image, Refresh the page and login again, Or be

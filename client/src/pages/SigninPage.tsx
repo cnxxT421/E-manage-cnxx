@@ -1,18 +1,33 @@
 import Signin from "@/components/shared/Signin";
+import { headerVariants, itemVariants } from "@/constants/animation";
+import { motion } from "framer-motion";
 
 const SigninPage = () => {
 	return (
-		<main>
-			<section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
-				<h3 className="wrapper h3-bold text-center sm:text-left">
+		<motion.section
+			initial="hidden"
+			animate="visible"
+			variants={headerVariants}
+			className="py-20"
+		>
+			<motion.section
+				variants={itemVariants}
+				className="bg-primary-50 wrapper bg-dotted-pattern bg-cover bg-center wrapper py-8"
+			>
+				<motion.h3
+					className="wrapper h3-bold text-center sm:text-left"
+					initial={{ opacity: 0, x: -20 }}
+					animate={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.5 }}
+				>
 					Access Your Account
-				</h3>
-			</section>
+				</motion.h3>
+			</motion.section>
 
-			<div className="wrapper my-8">
+			<motion.div className="wrapper my-8 flex justify-center items-center">
 				<Signin />
-			</div>
-		</main>
+			</motion.div>
+		</motion.section>
 	);
 };
 

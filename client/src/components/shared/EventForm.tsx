@@ -17,7 +17,7 @@ import { FileUploader } from "./FileUploader";
 import { useState } from "react";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
-
+import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "@/utils/axios";
@@ -77,7 +77,12 @@ const EventForm = () => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="flex flex-col gap-5"
 			>
-				<div className="flex flex-col gap-5 md:flex-row">
+				<motion.div
+					className="flex flex-col gap-5 md:flex-row"
+					initial={{ opacity: 0, x: -100 }}
+					animate={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.5 }}
+				>
 					<FormField
 						control={form.control}
 						name="title"
@@ -110,9 +115,14 @@ const EventForm = () => {
 							</FormItem>
 						)}
 					/>
-				</div>
+				</motion.div>
 
-				<div className="flex flex-col gap-5 md:flex-row">
+				<motion.div
+					className="flex flex-col gap-5 md:flex-row"
+					initial={{ opacity: 0, y: 100 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+				>
 					<FormField
 						control={form.control}
 						name="description"
@@ -144,9 +154,14 @@ const EventForm = () => {
 							</FormItem>
 						)}
 					/>
-				</div>
+				</motion.div>
 
-				<div className="flex flex-col gap-5 md:flex-row">
+				<motion.div
+					className="flex flex-col gap-5 md:flex-row"
+					initial={{ opacity: 0, y: 100 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+				>
 					<FormField
 						control={form.control}
 						name="location"
@@ -172,9 +187,14 @@ const EventForm = () => {
 							</FormItem>
 						)}
 					/>
-				</div>
+				</motion.div>
 
-				<div className="flex flex-col gap-5 md:flex-row">
+				<motion.div
+					className="flex flex-col gap-5 md:flex-row"
+					initial={{ opacity: 0, y: 100 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+				>
 					<FormField
 						control={form.control}
 						name="startDate"
@@ -242,9 +262,14 @@ const EventForm = () => {
 							</FormItem>
 						)}
 					/>
-				</div>
+				</motion.div>
 
-				<div className="flex flex-col gap-5 md:flex-row">
+				<motion.div
+					className="flex flex-col items-center gap-5 md:flex-row"
+					initial={{ opacity: 0, y: 100 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+				>
 					<FormField
 						control={form.control}
 						name="price"
@@ -265,34 +290,30 @@ const EventForm = () => {
 											{...field}
 											className="p-regular-16 border-0 bg-grey-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
 										/>
-										<FormField
-											control={form.control}
-											name="isFree"
-											render={({ field }) => (
-												<FormItem>
-													<FormControl>
-														<div className="flex items-center">
-															<label
-																htmlFor="isFree"
-																className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-															>
-																Free Ticket
-															</label>
-															<Checkbox
-																onCheckedChange={
-																	field.onChange
-																}
-																checked={
-																	field.value
-																}
-																id="isFree"
-																className="mr-2 h-5 w-5 border-2 border-primary-500"
-															/>
-														</div>
-													</FormControl>
-													<FormMessage />
-												</FormItem>
-											)}
+									</div>
+								</FormControl>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="isFree"
+						render={({ field }) => (
+							<FormItem>
+								<FormControl>
+									<div className="flex items-center">
+										<label
+											htmlFor="isFree"
+											className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+										>
+											Free Ticket
+										</label>
+										<Checkbox
+											onCheckedChange={field.onChange}
+											checked={field.value}
+											id="isFree"
+											className="mr-2 h-5 w-5 border-2 border-primary-500"
 										/>
 									</div>
 								</FormControl>
@@ -300,6 +321,7 @@ const EventForm = () => {
 							</FormItem>
 						)}
 					/>
+
 					<FormField
 						control={form.control}
 						name="url"
@@ -325,18 +347,31 @@ const EventForm = () => {
 							</FormItem>
 						)}
 					/>
-				</div>
+				</motion.div>
 
-				<Button
-					type="submit"
-					size="lg"
-					disabled={form.formState.isSubmitting}
-					className="button col-span-2 w-full"
+				<motion.div
+					className="flex flex-col gap-5 md:flex-row"
+					initial={{ opacity: 0, y: 100 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+				></motion.div>
+
+				<motion.div
+					initial={{ opacity: 0, scale: 0.8 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{ delay: 0.6 }}
 				>
-					{form.formState.isSubmitting
-						? "Creating..."
-						: `Create Event `}
-				</Button>
+					<Button
+						type="submit"
+						size="lg"
+						disabled={form.formState.isSubmitting}
+						className="button col-span-2 w-full transition-all duration-300 ease-in-out focus:ring-2 focus:ring-blue-500"
+					>
+						{form.formState.isSubmitting
+							? "Creating..."
+							: "Create Event"}
+					</Button>
+				</motion.div>
 			</form>
 		</Form>
 	);

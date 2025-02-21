@@ -60,7 +60,7 @@ module.exports = {
 				},
 			},
 			backgroundImage: {
-				"dotted-pattern": "url('/assets/dotted-pattern.png')",
+				"dotted-pattern": "url('/dotted-pattern.png')",
 				"hero-img": "url('/assets/hero.png')",
 			},
 			borderRadius: {

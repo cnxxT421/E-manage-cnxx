@@ -20,7 +20,9 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
 	useEffect(() => {
 		const getCategories = async () => {
 			const categoryList = await axios.get("/category");
-			categoryList && setCategories(categoryList.data.data);
+			if (categoryList) {
+				setCategories(categoryList.data.data);
+			}
 		};
 
 		getCategories();
