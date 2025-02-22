@@ -26,7 +26,7 @@ const Pagination = ({
 				whileTap={{ scale: 0.9 }}
 				onClick={handlePrevPage}
 				disabled={currentPage === 1}
-				className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:opacity-50"
+				className="px-4 py-2 rounded-lg bg-foreground text-background disabled:opacity-50"
 			>
 				Previous
 			</motion.button>
@@ -38,8 +38,8 @@ const Pagination = ({
 					onClick={() => handlePageChange(i + 1)}
 					className={`w-10 h-10 rounded-full ${
 						currentPage === i + 1
-							? "bg-blue-500 text-white"
-							: "bg-gray-200"
+							? "bg-foreground text-background"
+							: "bg-background border border-foreground"
 					}`}
 				>
 					{i + 1}
@@ -50,7 +50,7 @@ const Pagination = ({
 				whileTap={{ scale: 0.9 }}
 				onClick={handleNextPage}
 				disabled={currentPage === totalPages}
-				className="px-4 py-2 rounded-lg bg-blue-500 text-white disabled:opacity-50"
+				className="px-4 py-2 rounded-lg bg-foreground text-background disabled:opacity-50"
 			>
 				Next
 			</motion.button>

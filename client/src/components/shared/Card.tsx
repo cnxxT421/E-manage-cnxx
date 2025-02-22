@@ -13,12 +13,12 @@ const Card = ({ event }: { event: IEvent }) => {
 			exit={{ opacity: 0, y: -20 }}
 			whileHover={{ y: -6, scale: 1.03 }}
 			transition={{ duration: 0.3 }}
-			className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-lg md:min-h-[438px]"
+			className="group relative flex min-h-[380px] w-full max-w-[400px] flex-col overflow-hidden rounded-xl border border-gray-400 shadow-md transition-all hover:shadow-lg md:min-h-[438px]"
 		>
 			<MotionLink
 				to={`/events/${event._id}`}
 				style={{ backgroundImage: `url(${event.image})` }}
-				className="flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500"
+				className="flex-center flex-grow bg-cover bg-center text-grey-500"
 				whileHover={{ scale: 1.05 }}
 				transition={{ duration: 0.3 }}
 			/>
@@ -37,7 +37,7 @@ const Card = ({ event }: { event: IEvent }) => {
 				>
 					<motion.span
 						whileHover={{ scale: 1.05 }}
-						className="p-semibold-14 w-min rounded-full bg-green-100 px-4 py-1 text-green-60"
+						className="p-semibold-14 w-min rounded-full bg-green-500/20 px-4 py-1 text-green-60"
 					>
 						{event.isFree ? "FREE" : `$${event.price}`}
 					</motion.span>

@@ -12,11 +12,17 @@ module.exports = {
 		},
 		extend: {
 			colors: {
+				border: "hsl(var(--border))",
+				input: "hsl(var(--input))",
+				ring: "hsl(var(--ring))",
+				background: "hsl(var(--background))",
+				foreground: "hsl(var(--foreground))",
 				primary: {
-					500: "#624CF5",
-					50: " #F6F8FD",
-					DEFAULT: "#000",
+					DEFAULT: "hsl(var(--primary))",
 					foreground: "hsl(var(--primary-foreground))",
+					500: "#B64FC8",
+					100: "#EA80FC",
+					50: " #FFB2FF",
 				},
 				coral: {
 					500: "#15BF59",
@@ -29,11 +35,7 @@ module.exports = {
 					50: "#F6F6F6",
 				},
 				black: "#000000",
-				white: "#FFFFFF",
-				border: "hsl(var(--border))",
-				input: "hsl(var(--input))",
-				ring: "hsl(var(--ring))",
-				foreground: "hsl(var(--foreground))",
+				white: "#CCD6F6",
 				secondary: {
 					DEFAULT: "hsl(var(--secondary))",
 					foreground: "hsl(var(--secondary-foreground))",

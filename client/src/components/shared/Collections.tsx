@@ -107,7 +107,7 @@ const Collection = ({
 					<motion.div
 						key="empty"
 						variants={exploreItemVariants}
-						className="flex-center wrapper min-h-[200px] w-full flex-col gap-3 rounded-[14px] bg-grey-50 py-28 text-center mt-8"
+						className="flex-center wrapper min-h-[200px] w-full flex-col gap-3 rounded-[14px] py-28 text-center mt-8"
 					>
 						<motion.h3
 							className="p-bold-20 md:h5-bold"

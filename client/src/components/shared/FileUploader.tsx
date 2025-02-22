@@ -27,7 +27,7 @@ export function FileUploader({ onFieldChange, setFiles }: FileUploaderProps) {
 	};
 
 	return (
-		<div className="flex-center bg-dark-3 flex h-72 cursor-pointer flex-col overflow-hidden rounded-xl bg-grey-50">
+		<div className="flex-center border border-foreground flex h-72 cursor-pointer flex-col overflow-hidden rounded-2xl">
 			<input
 				type="file"
 				accept="image/png, image/jpeg, image/svg+xml"
@@ -37,7 +37,7 @@ export function FileUploader({ onFieldChange, setFiles }: FileUploaderProps) {
 			/>
 			<label
 				htmlFor="fileInput"
-				className={`flex-center flex-col py-5 text-grey-500 cursor-pointer ${
+				className={`flex-center flex-col py-5 cursor-pointer ${
 					!preview && "h-full w-full"
 				}`}
 			>
@@ -62,7 +62,7 @@ export function FileUploader({ onFieldChange, setFiles }: FileUploaderProps) {
 						<Button
 							type="button"
 							variant="outline"
-							className="border border-grey-500 rounded-full"
+							className="hover:bg-foreground hover:text-background duration-300 rounded-full"
 						>
 							Select from computer
 						</Button>

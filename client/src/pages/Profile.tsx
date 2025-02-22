@@ -83,7 +83,7 @@ const Profile = () => {
 		>
 			<motion.section
 				variants={itemVariants}
-				className="bg-primary-50 wrapper bg-dotted-pattern bg-cover bg-center wrapper py-8"
+				className="wrapper bg-dotted-pattern bg-cover bg-center py-8"
 			>
 				<motion.h3
 					className="wrapper h3-bold text-center sm:text-left"
@@ -101,7 +101,7 @@ const Profile = () => {
 					whileHover={{ scale: 1.02 }}
 					transition={{ type: "spring", stiffness: 300 }}
 				>
-					<Card className="shadow-lg p-4">
+					<Card className="shadow-lg p-4 bg-background text-foreground border-gray-600">
 						<CardHeader className="flex items-center space-x-4">
 							<AnimatePresence mode="wait">
 								{loading ? (
@@ -130,7 +130,7 @@ const Profile = () => {
 													alt={profile.username}
 												/>
 											) : (
-												<AvatarFallback className="text-2xl">
+												<AvatarFallback className="text-2xl bg-background border border-gray-600">
 													{profile?.firstName?.charAt(
 														0
 													) || "?"}
@@ -164,7 +164,7 @@ const Profile = () => {
 												{profile?.firstName}{" "}
 												{profile?.lastName}
 											</CardTitle>
-											<p className="text-gray-500">
+											<p className="text-gray-600">
 												@{profile?.username}
 											</p>
 										</motion.div>
@@ -228,6 +228,7 @@ const Profile = () => {
 											<Button
 												variant="outline"
 												onClick={handleLogout}
+												className="hover:bg-foreground hover:text-background duration-300"
 											>
 												Logout
 											</Button>
@@ -259,7 +260,7 @@ const Profile = () => {
 						open={deleteDialogOpen}
 						onOpenChange={setDeleteDialogOpen}
 					>
-						<DialogContent className="bg-primary-50">
+						<DialogContent className="bg-background">
 							<motion.div
 								initial={{ opacity: 0, y: 20 }}
 								animate={{ opacity: 1, y: 0 }}
@@ -268,7 +269,7 @@ const Profile = () => {
 								<DialogHeader>
 									<DialogTitle>Are you sure?</DialogTitle>
 								</DialogHeader>
-								<p className="text-gray-600 mt-2">
+								<p className="text-gray-600 my-2">
 									Deleting your profile is permanent and
 									cannot be undone.
 								</p>
@@ -282,6 +283,7 @@ const Profile = () => {
 											onClick={() =>
 												setDeleteDialogOpen(false)
 											}
+											className="hover:bg-foreground hover:text-background duration-300"
 										>
 											Cancel
 										</Button>

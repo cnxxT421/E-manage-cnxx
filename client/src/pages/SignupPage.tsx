@@ -12,7 +12,7 @@ const SignupPage = () => {
 		>
 			<motion.section
 				variants={itemVariants}
-				className="bg-primary-50 wrapper bg-dotted-pattern bg-cover bg-center wrapper py-8"
+				className="wrapper bg-dotted-pattern bg-cover bg-center py-8"
 			>
 				<motion.h3
 					className="wrapper h3-bold text-center sm:text-left"

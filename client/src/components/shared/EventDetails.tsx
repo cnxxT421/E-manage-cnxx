@@ -86,7 +86,7 @@ const EventDetails = () => {
 
 	return (
 		<section
-			className={`flex relative justify-center bg-primary-50 bg-dotted-pattern bg-contain pt-20 min-h-screen`}
+			className={`flex relative justify-center bg-dotted-pattern bg-contain pt-[72px] min-h-screen`}
 		>
 			<motion.div
 				className="grid grid-cols-1 md:grid-cols-2 2xl:max-w-7xl"
@@ -108,9 +108,9 @@ const EventDetails = () => {
 				) : (
 					<motion.div
 						variants={fadeIn}
-						className="h-full min-h-[300px] flex items-center justify-center bg-gray-200"
+						className="h-full min-h-[300px] bg-foreground flex items-center justify-center"
 					>
-						<p className="text-gray-500">No image available</p>
+						<p className="text-background">No image available</p>
 					</motion.div>
 				)}
 

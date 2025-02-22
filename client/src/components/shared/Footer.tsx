@@ -59,23 +59,24 @@ const Footer = () => {
 			whileInView="visible"
 			viewport={{ once: true }}
 			variants={containerVariants}
-			className="bg-gradient-to-t from-purple-200 to-white border-t"
+			className="border-t border-foreground"
 		>
 			<div className="wrapper py-12">
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 					<motion.div variants={itemVariants} className="space-y-4">
-						<Link to="/" className="w-36">
-							<motion.img
-								initial={{ opacity: 0, x: -20 }}
-								animate={{ opacity: 1, x: 0 }}
-								transition={{ duration: 0.3 }}
-								src="/logo.png"
-								alt="logo"
-								width={80}
-								className="object-contain"
-							/>
-						</Link>
-						<p className="text-gray-600 mt-4">
+						<motion.div
+							initial={{ opacity: 0, x: -20 }}
+							animate={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.5 }}
+						>
+							<Link
+								to="/"
+								className="text-2xl font-bold p-2 border-2 rounded-[2px] border-foreground hover:bg-foreground hover:text-background duration-300"
+							>
+								E-Manage
+							</Link>
+						</motion.div>
+						<p className="mt-4">
 							Transform your events into unforgettable experiences
 							with our comprehensive event management platform.
 						</p>
@@ -87,7 +88,7 @@ const Footer = () => {
 										href="#"
 										whileHover={{ scale: 1.2, rotate: 5 }}
 										whileTap={{ scale: 0.9 }}
-										className="text-gray-600 hover:text-blue-600 transition-colors"
+										className="hover:text-red-600 transition-colors"
 									>
 										<Icon size={20} />
 									</motion.a>
@@ -96,7 +97,6 @@ const Footer = () => {
 						</div>
 					</motion.div>
 
-					{/* Quick Links Sections */}
 					{Object.entries(footerLinks).map(([title, links]) => (
 						<motion.div
 							key={title}
@@ -118,7 +118,7 @@ const Footer = () => {
 									>
 										<Link
 											to={link.href}
-											className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
+											className="hover:text-red-600 transition-colors duration-200"
 										>
 											{link.label}
 										</Link>
@@ -129,10 +129,9 @@ const Footer = () => {
 					))}
 				</div>
 
-				{/* Contact Information */}
 				<motion.div
 					variants={itemVariants}
-					className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 py-8 border-t border-gray-200"
+					className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 py-8 border-t border-foreground"
 				>
 					{[
 						{ icon: Mail, text: "hello@emanage.com" },
@@ -144,7 +143,7 @@ const Footer = () => {
 					].map((item, index) => (
 						<motion.div
 							key={index}
-							className="flex items-center justify-center md:justify-start gap-2 text-gray-600"
+							className="flex items-center justify-center md:justify-start gap-2"
 							whileHover={{ scale: 1.02 }}
 						>
 							<item.icon size={18} />
@@ -156,18 +155,18 @@ const Footer = () => {
 				{/* Bottom Bar */}
 				<motion.div
 					variants={itemVariants}
-					className="mt-8 pt-8 border-t border-gray-200"
+					className="mt-8 pt-8 border-t border-foreground"
 				>
 					<div className="flex flex-col md:flex-row justify-between items-center gap-4">
 						<motion.p
-							className="text-gray-600 text-center md:text-left"
+							className="text-center md:text-left"
 							whileHover={{ scale: 1.02 }}
 						>
 							© {new Date().getFullYear()} E-manage. All rights
 							reserved.
 						</motion.p>
 						<motion.div
-							className="flex items-center gap-2 text-gray-600"
+							className="flex items-center gap-2"
 							whileHover={{ scale: 1.02 }}
 						>
 							<span>Made with</span>

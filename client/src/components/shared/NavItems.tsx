@@ -9,7 +9,7 @@ const NavItems = () => {
 			variants={containerVariants}
 			initial="hidden"
 			animate="visible"
-			className="md:flex-between flex w-full flex-col items-start gap-5 md:flex-row"
+			className="md:flex-between flex w-full flex-col items-start gap-8 md:flex-row"
 		>
 			{headerLinks.map((link) => (
 				<motion.li
@@ -22,10 +22,8 @@ const NavItems = () => {
 						to={link.route}
 						className={({ isActive }) =>
 							`${
-								isActive
-									? "text-blue-600 font-bold"
-									: "text-gray-700"
-							} flex-center p-medium-16 whitespace-nowrap hover:text-blue-500 transition-colors duration-200`
+								isActive ? "text-red-500" : ""
+							} flex-center p-semibold-16 whitespace-nowrap hover:text-red-500 transition-colors duration-200`
 						}
 					>
 						{link.label}

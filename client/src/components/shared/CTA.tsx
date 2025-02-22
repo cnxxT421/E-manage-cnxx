@@ -8,9 +8,9 @@ const CTA = () => {
 			whileInView={{ opacity: 1, y: 0 }}
 			viewport={{ once: true }}
 			transition={{ duration: 0.8 }}
-			className="py-20 bg-gradient-to-r from-blue-600 to-purple-600"
+			className="py-20 text-center bg-foreground text-background"
 		>
-			<div className="max-w-4xl mx-auto px-4 text-center text-white">
+			<div className="wrapper">
 				<motion.h2
 					initial={{ y: 20, opacity: 0 }}
 					whileInView={{ y: 0, opacity: 1 }}
@@ -33,7 +33,7 @@ const CTA = () => {
 					whileHover={{ scale: 1.05 }}
 					whileTap={{ scale: 0.95 }}
 				>
-					<Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-6 text-lg rounded-full">
+					<Button className=" px-8 py-6 text-lg border border-background rounded-[2px]">
 						Start Free Trial
 					</Button>
 				</motion.div>

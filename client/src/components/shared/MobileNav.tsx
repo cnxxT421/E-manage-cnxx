@@ -23,25 +23,26 @@ const MobileNav = () => {
 						<Menu className="w-6 h-6 text-gray-700" />
 					</motion.div>
 				</SheetTrigger>
-				<SheetContent className="flex flex-col gap-6 bg-white md:hidden">
+				<SheetContent className="flex flex-col gap-6 md:hidden">
 					<SheetTitle className="hidden">
 						Mobile Navigation
 					</SheetTitle>
 					<SheetDescription className="hidden">
 						This contains the mobile navigation
 					</SheetDescription>
-					<Link to="/" className="w-36">
-						<motion.img
-							initial={{ opacity: 0, x: -20 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ duration: 0.3 }}
-							src="/logo.png"
-							alt="logo"
-							width={80}
-							className="object-contain"
-						/>
-					</Link>
-					<Separator className="border border-gray-50" />
+					<motion.div
+						initial={{ opacity: 0, x: -20 }}
+						animate={{ opacity: 1, x: 0 }}
+						transition={{ duration: 0.5 }}
+					>
+						<Link
+							to="/"
+							className="text-2xl font-bold p-2 border-2 rounded-[2px] border-foreground hover:bg-foreground hover:text-background duration-300"
+						>
+							EM
+						</Link>
+					</motion.div>
+					<Separator className="border border-foreground" />
 					<NavItems />
 				</SheetContent>
 			</Sheet>

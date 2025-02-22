@@ -52,7 +52,7 @@ const Signin = () => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg space-y-6"
+				className="w-full max-w-lg p-6 border border-gray-600 rounded-lg shadow-lg space-y-6"
 			>
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ const Signin = () => {
 						control={form.control}
 						name="username"
 						render={({ field }) => (
-							<FormItem className="w-full">
+							<FormItem className="w-full border border-foreground rounded-full">
 								<FormControl>
 									<Input
 										placeholder="Username"
@@ -81,7 +81,7 @@ const Signin = () => {
 						control={form.control}
 						name="password"
 						render={({ field }) => (
-							<FormItem className="w-full">
+							<FormItem className="w-full border border-foreground rounded-full">
 								<FormControl>
 									<Input
 										placeholder="Password"
@@ -120,7 +120,7 @@ const Signin = () => {
 						type="submit"
 						size="lg"
 						disabled={form.formState.isSubmitting}
-						className="button col-span-2 w-full transition-all duration-300 ease-in-out hover:bg-blue-600 focus:ring-2 focus:ring-blue-500"
+						className="button col-span-2 w-full transition-all duration-300 ease-in-out"
 					>
 						{form.formState.isSubmitting
 							? "Submitting..."

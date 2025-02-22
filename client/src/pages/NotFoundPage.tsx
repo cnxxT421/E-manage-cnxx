@@ -9,7 +9,7 @@ const NotFoundPage = () => {
 	};
 
 	return (
-		<div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-white">
+		<div className="min-h-screen flex flex-col items-center justify-center">
 			<motion.div
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
@@ -34,21 +34,13 @@ const NotFoundPage = () => {
 					Oops! The page you're looking for doesn't exist.
 				</motion.p>
 
-				<motion.img
-					src="/logo.png"
-					alt="404 Error"
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					transition={{ duration: 1.5 }}
-					className="w-60 mx-auto"
-				/>
-
 				<motion.button
 					onClick={handleGoHome}
 					initial={{ scale: 0 }}
 					animate={{ scale: 1 }}
+					whileHover={{ scale: 1.1 }}
 					transition={{ type: "spring", stiffness: 250 }}
-					className="mt-6 px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600"
+					className="mt-6 px-6 py-2 bg-foreground text-background font-semibold rounded-lg"
 				>
 					Go Home
 				</motion.button>

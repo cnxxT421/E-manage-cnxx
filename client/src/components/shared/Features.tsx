@@ -1,11 +1,4 @@
-import {
-	Calendar,
-	Users,
-	Clock,
-	Ticket,
-	ChartBar,
-	ChartAreaIcon,
-} from "lucide-react";
+import { Calendar, Users, ChartAreaIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Card, CardContent } from "../ui/card";
@@ -51,24 +44,6 @@ const Features = () => {
 			description:
 				"Chat with team members, vendors, and clients in real-time for quick decisions",
 		},
-		{
-			icon: <ChartBar className="w-6 h-6" />,
-			title: "Analytics & Reporting",
-			description:
-				"Track event performance and generate reports to analyze attendee engagement",
-		},
-		{
-			icon: <Ticket className="w-6 h-6" />,
-			title: "Ticketing & Registration",
-			description:
-				"Manage event ticketing, attendee registration, and check-ins with ease",
-		},
-		{
-			icon: <Clock className="w-6 h-6" />,
-			title: "Real-Time Updates",
-			description:
-				"Send instant updates to attendees and vendors about schedule changes or announcements",
-		},
 	];
 
 	return (
@@ -77,16 +52,16 @@ const Features = () => {
 			initial="hidden"
 			whileInView="visible"
 			viewport={{ once: true }}
-			className="py-20 bg-gradient-to-l from-sky-50 to-white"
+			className="py-20"
 		>
-			<div className="max-w-6xl mx-auto px-4">
+			<div className="wrapper py-10">
 				<motion.h2
 					variants={itemVariants}
 					className="text-3xl font-bold text-center mb-16"
 				>
 					Why Choose E-manage?
 				</motion.h2>
-				<div className="grid md:grid-cols-3 gap-8">
+				<div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
 					{features.map((feature, index) => (
 						<motion.div
 							key={index}
@@ -98,7 +73,7 @@ const Features = () => {
 							onHoverStart={() => setIsHovered(index)}
 							onHoverEnd={() => setIsHovered(null)}
 						>
-							<Card className="h-full">
+							<Card className="h-full bg-background border-foreground/10 rounded-[2px]">
 								<CardContent className="p-6">
 									<motion.div
 										animate={
@@ -111,7 +86,7 @@ const Features = () => {
 												  }
 												: {}
 										}
-										className="rounded-full bg-blue-100 p-3 w-fit mb-4"
+										className="rounded-full bg-foreground text-background p-3 w-fit mb-4"
 									>
 										{feature.icon}
 									</motion.div>

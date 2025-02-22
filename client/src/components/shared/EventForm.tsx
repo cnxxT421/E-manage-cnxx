@@ -87,7 +87,7 @@ const EventForm = () => {
 						control={form.control}
 						name="title"
 						render={({ field }) => (
-							<FormItem className="w-full">
+							<FormItem className="w-full border border-foreground rounded-full">
 								<FormControl>
 									<Input
 										placeholder="Event title"
@@ -168,7 +168,7 @@ const EventForm = () => {
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormControl>
-									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full border border-foreground px-4 py-2">
 										<img
 											src="/location-grey.svg"
 											alt="calendar"
@@ -179,7 +179,7 @@ const EventForm = () => {
 										<Input
 											placeholder="Event location or Online"
 											{...field}
-											className="input-field"
+											className="input-field border-r-0"
 										/>
 									</div>
 								</FormControl>
@@ -201,7 +201,7 @@ const EventForm = () => {
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormControl>
-									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+									<div className="flex-center gap-2 h-[54px] w-full overflow-hidden rounded-full border border-foreground px-4 py-2">
 										<img
 											src="/calendar.svg"
 											alt="calendar"
@@ -217,6 +217,8 @@ const EventForm = () => {
 											onChange={(date: Date | null) =>
 												field.onChange(date)
 											}
+											className="bg-transparent mr-2 placeholder:text-grey-600 outline-none border-none"
+											placeholderText="Click to select a date"
 											showTimeSelect
 											timeInputLabel="Time:"
 											dateFormat="MM/dd/yyyy h:mm aa"
@@ -235,7 +237,7 @@ const EventForm = () => {
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormControl>
-									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+									<div className="flex-center gap-2 h-[54px] w-full overflow-hidden rounded-full border border-foreground px-4 py-2">
 										<img
 											src="/calendar.svg"
 											alt="calendar"
@@ -251,6 +253,8 @@ const EventForm = () => {
 											onChange={(date: Date | null) =>
 												field.onChange(date)
 											}
+											className="bg-transparent mr-2 placeholder:text-grey-600 outline-none border-none"
+											placeholderText="Click to select a date"
 											showTimeSelect
 											timeInputLabel="Time:"
 											dateFormat="MM/dd/yyyy h:mm aa"
@@ -276,7 +280,7 @@ const EventForm = () => {
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormControl>
-									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full border border-foreground px-4 py-2">
 										<img
 											src="/dollar.svg"
 											alt="dollar"
@@ -288,7 +292,7 @@ const EventForm = () => {
 											type="number"
 											placeholder="Price"
 											{...field}
-											className="p-regular-16 border-0 bg-grey-50 outline-offset-0 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+											className="input-field"
 										/>
 									</div>
 								</FormControl>
@@ -313,7 +317,7 @@ const EventForm = () => {
 											onCheckedChange={field.onChange}
 											checked={field.value}
 											id="isFree"
-											className="mr-2 h-5 w-5 border-2 border-primary-500"
+											className="mr-2 h-5 w-5 border-2"
 										/>
 									</div>
 								</FormControl>
@@ -328,7 +332,7 @@ const EventForm = () => {
 						render={({ field }) => (
 							<FormItem className="w-full">
 								<FormControl>
-									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2">
+									<div className="flex-center h-[54px] w-full overflow-hidden rounded-full border border-foreground px-4 py-2">
 										<img
 											src="/link.svg"
 											alt="link"

@@ -10,7 +10,7 @@ const Header = () => {
 			initial={{ y: -100 }}
 			animate={{ y: 0 }}
 			transition={{ type: "spring", stiffness: 100, damping: 20 }}
-			className="w-full border-b bg-white/80 backdrop-blur-sm fixed top-0 z-50"
+			className="w-full border-b border-foreground backdrop-blur-lg fixed top-0 z-50"
 		>
 			<div className="wrapper flex items-center justify-between p-4 max-w-7xl mx-auto">
 				<motion.div
@@ -18,16 +18,11 @@ const Header = () => {
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 0.5 }}
 				>
-					<Link to="/" className="w-36">
-						<motion.img
-							initial={{ opacity: 0, x: -20 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ duration: 0.3 }}
-							src="/logo.png"
-							alt="logo"
-							width={80}
-							className="object-contain"
-						/>
+					<Link
+						to="/"
+						className="text-2xl font-bold p-2 border-2 rounded-[2px] border-foreground hover:bg-foreground hover:text-background duration-300"
+					>
+						EM
 					</Link>
 				</motion.div>
 
@@ -41,11 +36,8 @@ const Header = () => {
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 0.5 }}
 				>
-					<motion.div
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-					>
-						<Button asChild className="rounded-full" size="lg">
+					<motion.div whileTap={{ scale: 0.95 }}>
+						<Button asChild className="rounded-[2px] text-md">
 							<Link to="/sign-in">Sign in</Link>
 						</Button>
 					</motion.div>

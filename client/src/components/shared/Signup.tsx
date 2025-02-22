@@ -70,7 +70,7 @@ const Signup = () => {
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full max-w-xl p-6 bg-white rounded-lg shadow-lg space-y-6"
+				className="w-full max-w-xl p-6 border border-gray-600 rounded-lg shadow-lg space-y-6"
 			>
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
@@ -83,7 +83,7 @@ const Signup = () => {
 							control={form.control}
 							name="firstName"
 							render={({ field }) => (
-								<FormItem className="w-full">
+								<FormItem className="w-full border border-foreground rounded-full">
 									<FormControl>
 										<Input
 											placeholder="First Name"
@@ -99,7 +99,7 @@ const Signup = () => {
 							control={form.control}
 							name="lastName"
 							render={({ field }) => (
-								<FormItem className="w-full">
+								<FormItem className="w-full border border-foreground rounded-full">
 									<FormControl>
 										<Input
 											placeholder="Last Name"
@@ -117,7 +117,7 @@ const Signup = () => {
 						control={form.control}
 						name="username"
 						render={({ field }) => (
-							<FormItem className="w-full">
+							<FormItem className="w-full border border-foreground rounded-full">
 								<FormControl>
 									<Input
 										placeholder="Username"
@@ -141,7 +141,7 @@ const Signup = () => {
 						control={form.control}
 						name="email"
 						render={({ field }) => (
-							<FormItem className="w-full">
+							<FormItem className="w-full border border-foreground rounded-full">
 								<FormControl>
 									<Input
 										placeholder="Email"
@@ -158,7 +158,7 @@ const Signup = () => {
 						control={form.control}
 						name="password"
 						render={({ field }) => (
-							<FormItem className="w-full">
+							<FormItem className="w-full border border-foreground rounded-full">
 								<FormControl>
 									<Input
 										placeholder="Password"

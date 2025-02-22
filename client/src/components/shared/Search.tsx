@@ -9,14 +9,14 @@ interface SearchProp {
 }
 
 const Search = ({
-	placeholder = "Search title...",
+	placeholder = "Search Events...",
 	searchTerm,
 	setSearchTerm,
 }: SearchProp) => {
 	return (
 		<motion.div
 			variants={exploreItemVariants}
-			className="flex-center min-h-[54px] w-full overflow-hidden rounded-full bg-grey-50 px-4 py-2"
+			className="flex-center min-h-[54px] w-full overflow-hidden rounded-full border border-foreground px-4 py-2"
 		>
 			<img src="/search.svg" alt="search" width={24} height={24} />
 
@@ -25,7 +25,7 @@ const Search = ({
 				placeholder={placeholder}
 				value={searchTerm}
 				onChange={(e) => setSearchTerm(e.target.value)}
-				className="p-regular-16 border-0 bg-grey-50 outline-offset-0 placeholder:text-grey-500 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
+				className="p-regular-16 border-0 outline-offset-0 placeholder:text-grey-600 focus:border-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none"
 			/>
 		</motion.div>
 	);
