@@ -1,10 +1,24 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavItems from "./NavItems";
 import { Button } from "../ui/button";
 import MobileNav from "./MobileNav";
+import { Loader2 } from "lucide-react";
+import { useAuth } from "@/context/AuthProvider";
 
 const Header = () => {
+	const { userData, logout, isLoading } = useAuth();
+	const navigate = useNavigate();
+
+	const handleLogout = async () => {
+		try {
+			await logout();
+			navigate("/");
+		} catch (error) {
+			console.error("Logout failed:", error);
+		}
+	};
+
 	return (
 		<motion.header
 			initial={{ y: -100 }}
@@ -36,12 +50,45 @@ const Header = () => {
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 0.5 }}
 				>
-					<motion.div whileTap={{ scale: 0.95 }}>
-						<Button asChild className="rounded-[2px] text-md">
-							<Link to="/sign-in">Sign in</Link>
-						</Button>
-					</motion.div>
-					<MobileNav />
+					{!isLoading && (
+						<>
+							{userData ? (
+								<>
+									<div className="hidden md:flex items-center gap-2">
+										<span className="text-sm font-medium whitespace-nowrap">
+											Hello,{" "}
+											{userData.firstName +
+												" " +
+												userData.lastName || "User"}
+										</span>
+									</div>
+									<motion.div whileTap={{ scale: 0.95 }}>
+										<Button
+											variant="destructive"
+											onClick={handleLogout}
+										>
+											Sign out
+										</Button>
+									</motion.div>
+								</>
+							) : (
+								<motion.div whileTap={{ scale: 0.95 }}>
+									<Button
+										asChild
+										className="rounded-[2px] text-md"
+									>
+										<Link to="/sign-in">Sign in</Link>
+									</Button>
+								</motion.div>
+							)}
+							<MobileNav />
+						</>
+					)}
+					{isLoading && (
+						<div className="w-36 flex justify-end">
+							<Loader2 className="h-5 w-5 animate-spin" />
+						</div>
+					)}
 				</motion.div>
 			</div>
 		</motion.header>

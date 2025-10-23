@@ -5,7 +5,7 @@ import { AxiosError } from "axios";
 import axios from "@/utils/axios";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import EventDeleteButton from "./EventDeleteButton";
 import AttendEventButton, { LeaveEventButton } from "./EventActionButton";
 import socket from "@/utils/socket";
@@ -33,6 +33,7 @@ const EventDetails = () => {
 	const [event, setEvent] = useState<IEvent | null>(null);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
+	const navigate = useNavigate();
 
 	const fetchEvent = useCallback(async () => {
 		setLoading(true);
@@ -47,10 +48,11 @@ const EventDetails = () => {
 				axiosError.response?.data?.message ||
 				"Failed to fetch event details.";
 			setError(errorMessage);
+			navigate("/sign-in");
 		} finally {
 			setLoading(false);
 		}
-	}, [id]);
+	}, [id, navigate]);
 
 	useEffect(() => {
 		fetchEvent();

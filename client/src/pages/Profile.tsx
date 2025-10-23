@@ -1,6 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-import { ErrorResponse } from "@/types/apiResponse";
-import { AxiosError } from "axios";
+import { useEffect, useState } from "react";
 import axios from "@/utils/axios";
 import { IUser } from "@/types/user";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,36 +16,43 @@ import {
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { headerVariants, itemVariants } from "@/constants/animation";
+import { useAuth } from "@/context/AuthProvider";
 
 const Profile = () => {
-	const [profile, setProfile] = useState<IUser | null>(null);
-	const [loading, setLoading] = useState<boolean>(true);
+	const { getProfile, userData, isLoading } = useAuth();
+
+	const [profile, setProfile] = useState<IUser | null>();
 	const [error, setError] = useState<string | null>(null);
 	const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
 	const [isDeleting, setIsDeleting] = useState<boolean>(false);
 	const navigate = useNavigate();
 
-	const fetchProfile = useCallback(async () => {
-		setLoading(true);
-		setError(null);
+	// const fetchProfile = useCallback(async () => {
+	// 	setLoading(true);
+	// 	setError(null);
 
-		try {
-			const response = await axios.get<{ data: IUser }>("/users/profile");
-			setProfile(response.data.data);
-		} catch (err) {
-			const axiosError = err as AxiosError<ErrorResponse>;
-			const errorMessage =
-				axiosError.response?.data.message ||
-				"An error occurred while fetching the profile.";
-			setError(errorMessage);
-		} finally {
-			setLoading(false);
-		}
-	}, []);
+	// 	try {
+	// 		const response = await axios.get<{ data: IUser }>("/users/profile");
+	// 		setProfile(response.data.data);
+	// 	} catch (err) {
+	// 		const axiosError = err as AxiosError<ErrorResponse>;
+	// 		const errorMessage =
+	// 			axiosError.response?.data.message ||
+	// 			"An error occurred while fetching the profile.";
+	// 		setError(errorMessage);
+	// 		navigate("/sign-in");
+	// 	} finally {
+	// 		setLoading(false);
+	// 	}
+	// }, [navigate]);
 
 	useEffect(() => {
-		fetchProfile();
-	}, [fetchProfile]);
+		if (userData) {
+			setProfile(userData);
+		}
+
+		getProfile();
+	}, [getProfile, userData]);
 
 	const handleLogout = async () => {
 		try {
@@ -104,7 +109,7 @@ const Profile = () => {
 					<Card className="shadow-lg p-4 bg-background text-foreground border-gray-600">
 						<CardHeader className="flex items-center space-x-4">
 							<AnimatePresence mode="wait">
-								{loading ? (
+								{isLoading ? (
 									<motion.div
 										key="skeleton"
 										initial={{ opacity: 0 }}
@@ -143,7 +148,7 @@ const Profile = () => {
 
 							<div>
 								<AnimatePresence mode="wait">
-									{loading ? (
+									{isLoading ? (
 										<motion.div
 											key="skeleton-content"
 											initial={{ opacity: 0 }}
@@ -174,7 +179,7 @@ const Profile = () => {
 						</CardHeader>
 
 						<CardContent>
-							{loading ? (
+							{isLoading ? (
 								<motion.div
 									key="loading"
 									initial={{ opacity: 0 }}

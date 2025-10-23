@@ -52,7 +52,7 @@ const HomePage = () => {
 
 						<p className="text-lg text-gray-700">
 							<Link
-								to="/explore"
+								to="/events"
 								className="explore relative cursor-pointer transition-all duration-300 hover:text-red-500 pr-2"
 							>
 								Discover Our Events &rarr;

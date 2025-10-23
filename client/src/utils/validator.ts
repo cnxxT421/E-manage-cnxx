@@ -14,9 +14,15 @@ export const eventFormSchema = z.object({
 	startDate: z.date(),
 	endDate: z.date(),
 	categoryId: z.string(),
-	price: z.string().refine((val) => !isNaN(Number(val)), {
-		message: "Price must be a number",
-	}),
+	price: z.string().refine(
+		(val) => {
+			const num = Number(val);
+			return !isNaN(num) && num >= 0;
+		},
+		{
+			message: "Price must be a non-negative number",
+		}
+	),
 	isFree: z.boolean(),
 	url: z.string().url("URL must be valid"),
 });

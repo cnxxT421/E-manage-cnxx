@@ -46,8 +46,8 @@ export const signupDefaultValues = {
 };
 
 export const signinDefaultValues = {
-	username: "",
-	password: "",
+	username: "john-doe",
+	password: "john12345",
 };
 
 export const categories = [
